@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: testing-project
+  jpa:
+    show-sql: true
+    properties:
+      hibernate.format_sql: true
+
+  datasource:
+    url: jdbc:postgresql://localhost:5430/testing-db
+    username: postgres
+    password: qwerty123
+
+jwt.secret: KODE

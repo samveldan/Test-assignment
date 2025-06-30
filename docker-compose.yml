@@ -1,0 +1,17 @@
+services:
+  db:
+    image: postgres:17
+    container_name: testing-db
+    environment:
+      - "POSTGRES_USER=postgres"
+      - "POSTGRES_PASSWORD=qwerty123"
+      - "POSTGRES_DB=testing-db"
+    ports:
+      - "5430:5432"
+    volumes:
+      - "pg-data:/var/lib/postgresql"
+      - "./docker/authors_and_books.sql:/docker-entrypoint-initdb.d/authors_and_books.sql"
+      - "./docker/users_and_roles.sql:/docker-entrypoint-initdb.d/users_and_roles.sql"
+
+volumes:
+  pg-data:
