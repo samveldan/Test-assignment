@@ -1,0 +1,10 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/users_and_roles/create-users-and-roles-tables.yaml
+  - include:
+      file: db/changelog/users_and_roles/insert-users-and-roles-tables.yaml
+
+  - include:
+      file: db/changelog/authors_and_books/create-authors-and-books-tables.yaml
+  - include:
+      file: db/changelog/authors_and_books/insert-authors-and-books-tables.yaml

@@ -1,0 +1,117 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-users
+      author: Samvel Danielyan
+      changes:
+        - insert:
+            tableName: person
+            columns:
+              - column:
+                  name: username
+                  value: maxim007
+              - column:
+                  name: password
+                  value: $2a$12$7k14.L6vHE6uwXEotNCvA.q2pY097yLpbLjVe1mBbF0M7Y6EAjPAe
+        - insert:
+            tableName: person
+            columns:
+              - column:
+                  name: username
+                  value: maxim007
+              - column:
+                  name: password
+                  value: $2a$12$/sXsf991/HUcNQIJU3IMNuk3qvCieM5sDPF46Fivf0pflZ4v0cROG
+        - insert:
+            tableName: person
+            columns:
+              - column:
+                  name: username
+                  value: valera
+              - column:
+                  name: password
+                  value: $2a$12$2/bT8Wu4Hgg4mZbfidoOauoP9RLLsgCi8x/oiI0NrEGd858uREVMe
+        - insert:
+            tableName: person
+            columns:
+              - column:
+                  name: username
+                  value: test
+              - column:
+                  name: password
+                  value: $2a$12$3ZKi0to3pqlE4fZs2BUp7ehHcr2l8W.KSnEezSLFp1.GzURrnVZG6
+
+  - changeSet:
+      id: insert-roles
+      author: Samvel Danielyan
+      changes:
+        - insert:
+            tableName: role
+            columns:
+              - column:
+                  name: role_name
+                  value: ROLE_USER
+        - insert:
+            tableName: role
+            columns:
+              - column:
+                  name: role_name
+                  value: ROLE_ADMIN
+
+  - changeSet:
+      id: insert-person-role
+      author: Samvel Danielyan
+      changes:
+        - insert:
+            tableName: person_role
+            columns:
+              - column:
+                  name: person_id
+                  valueNumeric: 1
+              - column:
+                  name: role_id
+                  valueNumeric: 1
+        - insert:
+            tableName: person_role
+            columns:
+              - column:
+                  name: person_id
+                  valueNumeric: 1
+              - column:
+                  name: role_id
+                  valueNumeric: 2
+        - insert:
+            tableName: person_role
+            columns:
+              - column:
+                  name: person_id
+                  valueNumeric: 2
+              - column:
+                  name: role_id
+                  valueNumeric: 1
+        - insert:
+            tableName: person_role
+            columns:
+              - column:
+                  name: person_id
+                  valueNumeric: 3
+              - column:
+                  name: role_id
+                  valueNumeric: 1
+        - insert:
+            tableName: person_role
+            columns:
+              - column:
+                  name: person_id
+                  valueNumeric: 4
+              - column:
+                  name: role_id
+                  valueNumeric: 1
+        - insert:
+            tableName: person_role
+            columns:
+              - column:
+                  name: person_id
+                  valueNumeric: 4
+              - column:
+                  name: role_id
+                  valueNumeric: 2

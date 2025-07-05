@@ -1,0 +1,64 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-authors
+      author: Samvel Danielyan
+      changes:
+        - createTable:
+            tableName: author
+            columns:
+              - column:
+                  name: id
+                  type: bigserial
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: birth_year
+                  type: int
+                  constraints:
+                    checkConstraint: birth_year <= 2025
+
+  - changeSet:
+      id: create-books
+      author: Samvel Danielyan
+      changes:
+        - createTable:
+            tableName: book
+            columns:
+              - column:
+                  name: id
+                  type: bigserial
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: title
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: year
+                  type: int
+                  constraints:
+                    nullable: false
+                    checkConstraint: year <= 2025
+              - column:
+                  name: genre
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: author_id
+                  type: int
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseTableName: book
+            baseColumnNames: author_id
+            referencedTableName: author
+            referencedColumnNames: id
+            onDelete: CASCADE
+            constraintName: fk_author

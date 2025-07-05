@@ -1,0 +1,81 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-users
+      author: Samvel Danielyan
+      changes:
+        - createTable:
+            tableName: person
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: username
+                  type: varchar(30)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: password
+                  type: text
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: create-roles
+      author: Samvel Danielyan
+      changes:
+        - createTable:
+            tableName: role
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: role_name
+                  type: varchar(20)
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: create-person-role
+      author: Samvel Danielyan
+      changes:
+        - createTable:
+            tableName: person_role
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: person_id
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_person
+                    references: person(id)
+              - column:
+                  name: role_id
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_role
+                    references: role(id)
+        - addUniqueConstraint:
+            tableName: person_role
+            columnNames: person_id, role_id
+            constraintName: uq_person_role

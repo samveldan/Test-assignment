@@ -10,8 +10,6 @@ services:
       - "5430:5432"
     volumes:
       - "pg-data:/var/lib/postgresql"
-      - "./docker/authors_and_books.sql:/docker-entrypoint-initdb.d/authors_and_books.sql"
-      - "./docker/users_and_roles.sql:/docker-entrypoint-initdb.d/users_and_roles.sql"
 
 volumes:
   pg-data:

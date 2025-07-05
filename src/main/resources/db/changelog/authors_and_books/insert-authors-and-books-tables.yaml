@@ -1,0 +1,144 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-authors
+      author: Samvel Danielyan
+      changes:
+        - insert:
+            tableName: author
+            columns:
+              - column:
+                  name: name
+                  value: Pushkin A.S.
+              - column:
+                  name: birth_year
+                  valueNumeric: 1799
+        - insert:
+            tableName: author
+            columns:
+              - column:
+                  name: name
+                  value: Michail Y.L.
+              - column:
+                  name: birth_year
+                  valueNumeric: 1814
+        - insert:
+            tableName: author
+            columns:
+              - column:
+                  name: name
+                  value: Tolstoy L.N.
+              - column:
+                  name: birth_year
+                  valueNumeric: 1828
+
+  - changeSet:
+      id: insert-books
+      author: Samvel Danielyan
+      changes:
+        - insert:
+            tableName: book
+            columns:
+              - column:
+                  name: title
+                  value: Eugene Onegin
+              - column:
+                  name: author_id
+                  valueNumeric: 1
+              - column:
+                  name: year
+                  valueNumeric: 1833
+              - column:
+                  name: genre
+                  value: POETRY
+        - insert:
+            tableName: book
+            columns:
+              - column:
+                  name: title
+                  value: The Captain's Daughter
+              - column:
+                  name: author_id
+                  valueNumeric: 1
+              - column:
+                  name: year
+                  valueNumeric: 1836
+              - column:
+                  name: genre
+                  value: HISTORICAL_NOVEL
+
+        - insert:
+            tableName: book
+            columns:
+              - column:
+                  name: title
+                  value: A Hero of Our Time
+              - column:
+                  name: author_id
+                  valueNumeric: 2
+              - column:
+                  name: year
+                  valueNumeric: 1840
+              - column:
+                  name: genre
+                  value: NOVEL
+        - insert:
+            tableName: book
+            columns:
+              - column:
+                  name: title
+                  value: Mtsyri
+              - column:
+                  name: author_id
+                  valueNumeric: 2
+              - column:
+                  name: year
+                  valueNumeric: 1840
+              - column:
+                  name: genre
+                  value: POEM
+
+        - insert:
+            tableName: book
+            columns:
+              - column:
+                  name: title
+                  value: War and Peace
+              - column:
+                  name: author_id
+                  valueNumeric: 3
+              - column:
+                  name: year
+                  valueNumeric: 1869
+              - column:
+                  name: genre
+                  value: NOVEL
+        - insert:
+            tableName: book
+            columns:
+              - column:
+                  name: title
+                  value: Anna Karenina
+              - column:
+                  name: author_id
+                  valueNumeric: 3
+              - column:
+                  name: year
+                  valueNumeric: 1877
+              - column:
+                  name: genre
+                  value: NOVEL
+        - insert:
+            tableName: book
+            columns:
+              - column:
+                  name: title
+                  value: The Death of Ivan Ilyich
+              - column:
+                  name: author_id
+                  valueNumeric: 3
+              - column:
+                  name: year
+                  valueNumeric: 1886
+              - column:
+                  name: genre
+                  value: NOVELLA
