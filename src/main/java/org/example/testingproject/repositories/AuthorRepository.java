@@ -13,6 +13,6 @@ import java.util.Optional;
 public interface AuthorRepository extends JpaRepository<Author, Long> {
     Optional<Author> findByName(String author);
 
-    @Query("select a from Author a join fetch a.books where a.id = :id")
+    @Query("select a from Author a left join fetch a.books where a.id = :id")
     Optional<Author> findByIdWithBooks(@Param("id") Long id);
 }
