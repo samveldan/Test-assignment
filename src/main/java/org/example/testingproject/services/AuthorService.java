@@ -52,7 +52,6 @@ public class AuthorService {
     /**
      * Создать автора.
      * @param authorDto DTO автора
-     * @throws AuthorIsNotFound если автор с указанным id не найден
      */
     public Author createAuthor(AuthorDto authorDto) {
         Author author = mapper.map(authorDto, Author.class);
