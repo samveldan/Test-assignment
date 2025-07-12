@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.example.testingproject.dto.AuthorDto;
 import org.example.testingproject.exceptions.AuthorIsNotFound;
 import org.example.testingproject.exceptions.BookIsNotFound;
+import org.example.testingproject.mappers.AuthorMapper;
 import org.example.testingproject.models.Author;
 import org.example.testingproject.models.Book;
 import org.example.testingproject.repositories.AuthorRepository;
@@ -25,7 +26,7 @@ import java.util.Optional;
 @Service
 public class AuthorService {
     private final AuthorRepository authorRepository;
-    private final ModelMapper mapper;
+    private final AuthorMapper authorMapper;
 
     /**
      * Получить авторов с их книгами постранично.
@@ -35,7 +36,7 @@ public class AuthorService {
         Page<Author> authors = authorRepository.findAll(pageable);
 
         return authors.getContent().stream()
-                .map(this::convertToDtoWithBookTitles).toList();
+                .map(authorMapper::toDto).toList();
     }
 
     /**
@@ -45,32 +46,18 @@ public class AuthorService {
      */
     public AuthorDto findById(Long id) {
         return authorRepository.findByIdWithBooks(id)
-                .map(this::convertToDtoWithBookTitles)
+                .map(authorMapper::toDto)
                 .orElseThrow(() -> new AuthorIsNotFound("Нет такого автора"));
     }
 
     /**
      * Создать автора.
      * @param authorDto DTO автора
+     * @throws AuthorIsNotFound если автор с указанным id не найден
      */
     public Author createAuthor(AuthorDto authorDto) {
-        Author author = mapper.map(authorDto, Author.class);
+        Author author = authorMapper.toEntity(authorDto);
 
         return authorRepository.save(author);
-    }
-
-    /**
-     * Конвертация из {@link Author} в {@link AuthorDto}.
-     * Получаем сущности книг из {@link Author} и передаем их названия
-     * в {@link AuthorDto}
-     * @param author сущность автора
-     */
-    private AuthorDto convertToDtoWithBookTitles(Author author) {
-        return new AuthorDto(
-                author.getName(),
-                author.getBirthYear(),
-                author.getBooks().stream()
-                        .map(Book::getTitle).toList()
-        );
     }
 }

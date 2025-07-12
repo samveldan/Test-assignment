@@ -5,6 +5,7 @@ import org.example.testingproject.dto.AuthorDto;
 import org.example.testingproject.dto.BookDto;
 import org.example.testingproject.exceptions.AuthorIsNotFound;
 import org.example.testingproject.exceptions.BookIsNotFound;
+import org.example.testingproject.mappers.BookMapper;
 import org.example.testingproject.models.Author;
 import org.example.testingproject.models.Book;
 import org.example.testingproject.repositories.AuthorRepository;
@@ -24,6 +25,7 @@ import java.util.List;
 public class BookService {
     private final BookRepository bookRepository;
     private final AuthorRepository authorRepository;
+    private final BookMapper bookMapper;
 
     /**
      * Создать книгу.
@@ -49,7 +51,7 @@ public class BookService {
      */
     public List<BookDto> findAll() {
         return bookRepository.findAll().stream()
-                .map(this::convertToDtoWithAuthorName)
+                .map(bookMapper::toDto)
                 .toList();
     }
 
@@ -59,7 +61,7 @@ public class BookService {
      */
     public BookDto findById(Long id) {
         return bookRepository.findById(id)
-                .map(this::convertToDtoWithAuthorName)
+                .map(bookMapper::toDto)
                 .orElseThrow(() -> new BookIsNotFound("Нет такой книги"));
     }
 
@@ -85,9 +87,8 @@ public class BookService {
         book.setYear(bookDto.getYear());
 
         bookRepository.save(book);
-        return convertToDtoWithAuthorName(book);
+        return bookMapper.toDto(book);
     }
-
 
     /**
      * Удаляем книгу.
@@ -101,20 +102,5 @@ public class BookService {
                         () -> {throw new BookIsNotFound("Нет такой книги");}
                 );
 
-    }
-
-    /**
-     * Конвертация из {@link Book} в {@link BookDto}.
-     * Получаем сущность автора из {@link Book} и передаем его имя
-     * в {@link BookDto}
-     * @param book сущность книги
-     */
-    private BookDto convertToDtoWithAuthorName(Book book) {
-        return new BookDto(
-                book.getTitle(),
-                book.getYear(),
-                book.getGenre(),
-                book.getAuthor().getName()
-        );
     }
 }
