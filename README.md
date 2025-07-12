@@ -15,6 +15,7 @@
 - Spring Security (JWT)
 - Liquibase (управление миграциями БД)
 - PostgreSQL
+- Redis
 - Docker + Docker Compose
 - Testcontainers (интеграционные тесты с поднятием базы в контейнере)
 - JUnit 5 (unit и интеграционные тесты)
@@ -168,6 +169,14 @@ Authorization: Bearer ваш_access_токен
 
 ---
 
+### Кэширование с Redis
+В проекте для повышения производительности используется кэширование с помощью Redis.
+
+Сервис настроен через Spring Cache и Spring Data Redis, а кэшируемые методы аннотируются `@Cacheable`, `@CachePut` и `@CacheEvict`.
+
+Redis запущен через Docker Compose и доступен на порту `6379`.
+
+---
 ### Тестирование
 В проекте реализованы unit-тесты и интеграционные тесты с использованием <br>
 `JUnit 5` и `Testcontainers`.

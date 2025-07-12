@@ -7,9 +7,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.example.testingproject.enums.Genre;
 
+import java.io.Serializable;
+
 @Data
 @AllArgsConstructor
-public class BookDto {
+public class BookDto implements Serializable {
     @NotBlank(message = "Заполните поле")
     @Size(max = 50, message = "Название не больше 50 символов")
     private String title;

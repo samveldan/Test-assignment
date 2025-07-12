@@ -10,6 +10,7 @@ import org.example.testingproject.models.Book;
 import org.example.testingproject.repositories.AuthorRepository;
 import org.example.testingproject.repositories.BookRepository;
 import org.modelmapper.ModelMapper;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -44,6 +45,7 @@ public class AuthorService {
      * @param id идентификатор автора
      * @throws AuthorIsNotFound если автор с указанным id не найден
      */
+    @Cacheable(value = "AuthorDto", key = "#id")
     public AuthorDto findById(Long id) {
         return authorRepository.findByIdWithBooks(id)
                 .map(authorMapper::toDto)

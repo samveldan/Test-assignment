@@ -11,6 +11,9 @@ import org.example.testingproject.models.Book;
 import org.example.testingproject.repositories.AuthorRepository;
 import org.example.testingproject.repositories.BookRepository;
 import org.modelmapper.ModelMapper;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -49,6 +52,7 @@ public class BookService {
     /**
      * Получить все книги.
      */
+    @Cacheable(value = "BookDtos")
     public List<BookDto> findAll() {
         return bookRepository.findAll().stream()
                 .map(bookMapper::toDto)
@@ -59,6 +63,7 @@ public class BookService {
      * @param id идентификатор книги
      * @throws BookIsNotFound если книга с указанным id не найдена
      */
+    @Cacheable(value = "BookDto", key = "#id")
     public BookDto findById(Long id) {
         return bookRepository.findById(id)
                 .map(bookMapper::toDto)
@@ -72,6 +77,7 @@ public class BookService {
      * @throws BookIsNotFound если книга с указанным id не найдена,
      * @throws AuthorIsNotFound если в bookDto передали несуществующего автора
      */
+    @CachePut(value = "BookDto", key = "#id")
     public BookDto updateById(Long id, BookDto bookDto) {
         Book book = bookRepository.findById(id)
                 .orElseThrow(() -> new BookIsNotFound("Нет такой книги"));
@@ -95,12 +101,12 @@ public class BookService {
      * @param id идентификатор книги
      * @throws BookIsNotFound если книга с указанным id не найдена
      */
+    @CacheEvict(value = "BookDto", key = "#id")
     public void deleteById(Long id) {
         bookRepository.findById(id)
                 .ifPresentOrElse(
                         book -> bookRepository.deleteById(id),
                         () -> {throw new BookIsNotFound("Нет такой книги");}
                 );
-
     }
 }

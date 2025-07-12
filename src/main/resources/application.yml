@@ -1,6 +1,7 @@
 spring:
   application:
     name: testing-project
+
   jpa:
     show-sql: true
     properties:
@@ -10,5 +11,13 @@ spring:
     url: jdbc:postgresql://localhost:5430/testing-db
     username: postgres
     password: qwerty123
+
+  cache:
+    type: redis
+
+  data:
+    redis:
+      host: localhost
+      port: 6379
 
 jwt.secret: KODE

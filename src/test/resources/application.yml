@@ -6,4 +6,7 @@ spring:
     hibernate:
       ddl-auto: create-drop
 
+  cache:
+    type: none
+
 jwt.secret: KODE

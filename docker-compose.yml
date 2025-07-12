@@ -11,5 +11,17 @@ services:
     volumes:
       - "pg-data:/var/lib/postgresql"
 
+  redis:
+    image: redis
+    container_name: redis-container
+    ports:
+      - "6379:6379"
+
+  redis-insight:
+    image: redis/redisinsight
+    container_name: redis_insight-container
+    ports:
+      - "5540:5540"
+
 volumes:
   pg-data:
