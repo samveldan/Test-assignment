@@ -21,3 +21,5 @@ spring:
       port: 6379
 
 jwt.secret: KODE
+
+# test
