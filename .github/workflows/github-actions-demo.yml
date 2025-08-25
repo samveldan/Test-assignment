@@ -12,7 +12,8 @@ jobs:
         uses: actions/setup-java@v5.0.0
         with:
           java-version: 17
-
+          distribution: temurin
+          
       - name: Clean and Build
         run: ./gradlew clean build
       
