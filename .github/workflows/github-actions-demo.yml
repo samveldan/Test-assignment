@@ -14,8 +14,8 @@ jobs:
           java-version: 17
           distribution: temurin
           
-      - name: Clean and Build
-        run: mvn clean build
+      - name: Clean and Package
+        run: mvn clean package
       
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
