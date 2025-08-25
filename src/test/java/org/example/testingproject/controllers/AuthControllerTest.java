@@ -56,8 +56,8 @@ class AuthControllerTest {
         String accessToken = tokens.getAccessToken();
         String refreshToken = tokens.getRefreshToken();
 
-        assertThat(accessToken).isNotNull();
-        assertThat(refreshToken).isNull();
+        assertThat(accessToken).isNull();
+        assertThat(refreshToken).isNotNull();
         assertThat(jwtService.isTokenValid(accessToken)).isTrue();
         assertThat(jwtService.isTokenValid(refreshToken)).isTrue();
     }
